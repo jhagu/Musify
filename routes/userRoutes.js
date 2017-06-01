@@ -8,6 +8,7 @@ var md_upload = multiparty({uploadDir: "./uploads/users"});
 var api = express.Router();
 //Para proteger las rutas a las que queremos que acceda el usuario, pasamos el middleware de autenticacion como 2
 //parametro en el metodo.
+//api.get("/testUserController", userController.pruebas);
 api.get("/testUserController", md_auth.ensureAuth, userController.pruebas);
 api.post("/register", userController.saveUser);
 api.post("/login", userController.loginUser);
