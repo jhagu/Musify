@@ -9,12 +9,18 @@ var app = express();
 
                 //Rutas de usuario
 var userRoutes = require("./routes/userRoutes.js");
+var artistRoutes = require("./routes/artistRoutes.js");
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 //configurar cabeceras http
 
-//Rutas Base
+//Rutas Base de Usuario
 app.use("/user", userRoutes);
+
+//Rutas base de Artista
+app.use("/artist", artistRoutes);
+
+
 module.exports = app;
