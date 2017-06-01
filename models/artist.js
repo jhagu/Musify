@@ -2,7 +2,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-ArtistSchema = Schema({
+var ArtistSchema = Schema({
     name : String,
     description : String,
     image : String
