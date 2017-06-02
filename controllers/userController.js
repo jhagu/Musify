@@ -35,7 +35,7 @@ function saveUser(req, res){
                             res.status(404).send({message: "No se ha registrado el usuario"});
                         }
                         else{
-                            res.status(200).send({user: userStored});
+                            res.status(200).send({message: "Usuario guardado", user: userStored});
                         }
                     }
                 });
@@ -75,7 +75,7 @@ function loginUser(req, res){
                             res.status(200).send({token: jwt.createToken(user)});
                         }
                         else{
-                            res.status(200).send({user: user});
+                            res.status(200).send({message: "Usuario logueado", user: user});
                         }     
                     }
                     else{
@@ -98,10 +98,10 @@ function updateUser(req, res){
         }
         else{
             if (!userUpdated){
-                res.status(494).send({message: "No se ha podido actualizar el usuario"});
+                res.status(404).send({message: "No se ha podido actualizar el usuario"});
             }
             else{
-                res.status(200).send({user: userUpdated})
+                res.status(200).send({message: "Usuario actualizado", user: userUpdated})
             }
         }
     });
@@ -128,10 +128,10 @@ function uploadImage(req, res){
                 }
                 else{
                     if (!userUpdated){
-                        res.status(494).send({message: "No se ha podido actualizar la imagen del usuario"});
+                        res.status(404).send({message: "No se ha podido actualizar la imagen del usuario"});
                     }
                     else{
-                        res.status(200).send({user: userUpdated})
+                        res.status(200).send({message: "Imagen de usuario actualizada", user: userUpdated})
                     }
                 }
             });
