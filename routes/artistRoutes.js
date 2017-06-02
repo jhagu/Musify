@@ -8,7 +8,8 @@ var api = express.Router();
 //Para proteger las rutas a las que queremos que acceda el usuario, pasamos el middleware de autenticacion como 2
 //parametro en el metodo.
 //api.get("/testUserController", userController.pruebas);
-api.get("/get/:id", md_auth.ensureAuth, artistController.getArtist);
+api.get("/getArtist/:id", md_auth.ensureAuth, artistController.getArtist);
 api.post("/saveArtist", md_auth.ensureAuth, artistController.saveArtist);
+api.get("/getAll/:page?", md_auth.ensureAuth, artistController.getAll);
 
 module.exports = api;
