@@ -7,8 +7,8 @@ var md_auth = require("../middlewares/autheticated.js");
 var md_upload = multiparty({uploadDir: "./uploads/album"});
 var api = express.Router();
 
-api.get("/getAlbum", md_auth.ensureAuth, albumController.getAlbum);
-//api.post("/saveArtist", md_auth.ensureAuth, artistController.saveArtist);
+api.get("/getAlbum/:id", md_auth.ensureAuth, albumController.getAlbum);
+api.post("/saveAlbum", md_auth.ensureAuth, albumController.saveAlbum);
 //api.get("/getAll/:page?", md_auth.ensureAuth, artistController.getAll);
 //api.put("/updateArtist/:id", md_auth.ensureAuth, artistController.updateArtist);
 //api.delete("/deleteArtist/:id", md_auth.ensureAuth, artistController.deleteArtist);
