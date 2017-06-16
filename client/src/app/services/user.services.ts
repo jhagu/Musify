@@ -19,7 +19,7 @@ export class UserService{
     //Metodo para loguearse
     public signUp(userToLogin, getHash = null){
 
-        if (!getHash){
+        if (getHash != null){
             userToLogin.getHash = getHash;
         }
 
@@ -27,7 +27,6 @@ export class UserService{
         let params = json;
 
         let headers = new Headers({"Content-Type": "application/json"});
-
         return this._http.post(this.url + "/login", params, {headers: headers}).map(res => res.json());
     }
 }

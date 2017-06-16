@@ -11,7 +11,7 @@ import {UserService} from "./services/user.services";
 export class AppComponent implements OnInit {
   public title = 'Musify';
   public user : User;
-  public identity=false; //Propiedad con los datos del usuario logueado
+  public identity; //Propiedad con los datos del usuario logueado
   public token;
   public errMessage;
 
@@ -24,21 +24,47 @@ export class AppComponent implements OnInit {
   }
 
   public onSubmit(){
-    console.log(this.user);
-
+    //Datos del usuario identificado
     this._userService.signUp(this.user).subscribe(
       response => {
-        console.log(response);
+        let identity = response.user;
+        //this.identity -->  variable global de este componente
+        this.identity = identity;
 
+        if (!this.identity._id){
+          alert("Usuario no identificado");
+        }
+        else{
+          //Crear elemento en el localstorage para la sesion del usuario
+
+          //Obtener token para enviarlo a cada peticion http
+          this._userService.signUp(this.user, true).subscribe(
+            response => {
+              let token = response.token;
+              //this.token -->  variable global de este componente
+              this.token = token;
+
+              if (this.token <= 0){
+                alert("Token generado incorrectamente");
+              }
+              else{
+                //Crear elemento en el localstorage para el token
+                console.log("Usuario:");
+                console.log(identity);
+                console.log("Token:\n" + token);
+              }
+            },
+            err => {
+              let body = JSON.parse(err._body);
+              this.errMessage = body.message;
+              }
+          );
+        }
       },
       err => {
         let body = JSON.parse(err._body);
         this.errMessage = body.message;
-        if (this.errMessage!=null){
-          console.log(err);   
         }
-      }
     );
   }
-
 }

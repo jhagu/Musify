@@ -11,8 +11,8 @@
 
 <div class="col-lg-12" *ngIf="!identity">
   <div class="col-lg-6">
-    <h1>Sign In</h1>
     <form #loginForm ="ngForm" (ngSubmit) = "onSubmit()" class="col-md-10">
+      <h1>Sign In</h1>
       <div *ngIf="errMessage">
         <div class="alert alert-danger">
           <strong>Error!</strong> {{errMessage}}
@@ -30,8 +30,8 @@
     </form>
   </div>
   <div class="col-lg-6">
-    <h1>Sign Up</h1>
     <form class="col-md-10">
+      <h1>Sign Up</h1>
       <p>
         <label>First Name: </label><input type="text" class="form-control" required/>
       </p>

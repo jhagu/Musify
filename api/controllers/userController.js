@@ -56,9 +56,7 @@ function loginUser(req, res){
     var email = params.email;
     var password = params.password;
 
-    console.log(params);
-
-    User.findOne({email: email.toLowerCase()}, (err,user) => {
+    User.findOne({email : email.toLowerCase()}, (err,user) => {
         if (err){
             res.status(500).send({message: "Error en la petición"});
         }
@@ -72,14 +70,14 @@ function loginUser(req, res){
                     if (check){
                         //Datos del usuario logueado,getHash se manda en PostMan
                         if (params.getHash){
-                            res.status(200).send({token: jwt.createToken(user)});
+                            res.status(200).send({token : jwt.createToken(user)});
                         }
                         else{
-                            res.status(200).send({message: "Usuario logueado", user: user});
+                            res.status(200).send({message : "Usuario logueado", user: user});
                         }     
                     }
                     else{
-                        res.status(404).send({message: "El usuario no ha podido loguearse"});
+                        res.status(404).send({message : "El usuario no ha podido loguearse"});
                     }
                 });
             }
