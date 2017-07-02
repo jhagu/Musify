@@ -1,17 +1,20 @@
-<div *ngIf="identity" class="navigation col-lg-1">
+<div *ngIf="identity" class="navigation col-lg-2">
   <h1>
     {{title}}
   </h1>
+  <span>Welcome {{identity.firstName}} =D</span>
+  <span class="btn btn-warning" (click)="signOut()">Sign Out</span>
 </div>
 
 <div class="clearfix"></div>
 <div *ngIf="identity" class="central col-lg-11">
-  <p>Estas logueado en la aplicacion</p>
+  <p>You are logued in {{title}}</p>
 </div>
+
 
 <div class="col-lg-12" *ngIf="!identity">
   <div class="col-lg-6">
-    <form #loginForm ="ngForm" (ngSubmit) = "onSubmit()" class="col-md-10">
+    <form #loginForm ="ngForm" (ngSubmit) = "onSignIn()" class="col-md-10">
       <h1>Sign In</h1>
       <div *ngIf="errMessage">
         <div class="alert alert-danger">
@@ -21,7 +24,7 @@
       <p>
         <label>Email: </label>
         <input type="email" name="txtEmail" #txtEmail="ngModel" [(ngModel)] = "user.email"  class="form-control" required/>
-        <span class="text-danger" *ngIf="!txtEmail.valid && txtEmail.touched">El email es obligatorio!</span>
+        <span class="text-danger" *ngIf="!txtEmail.valid && txtEmail.touched">Email is mandatory!</span>
       </p>
       <p>
         <label>Password: </label><input type="password" name="txtPassword" #txtPassword="ngModel" [(ngModel)] = "user.password" class="form-control" required/>
@@ -29,23 +32,31 @@
         <input type="submit" value="Sing In" class="btn btn-primary" required/>
     </form>
   </div>
+
+
+
   <div class="col-lg-6">
-    <form class="col-md-10">
+    <form #registerForm = "ngForm" class="col-md-10" (ngSubmit)="onSignUp()">
       <h1>Sign Up</h1>
       <p>
-        <label>First Name: </label><input type="text" class="form-control" required/>
+        <label>First Name: </label><input type="text" name="txtFirstName" #txtFirstName="ngModel" [(ngModel)] = "userToRegister.firstName" class="form-control" required/>
+        <span class="text-danger" *ngIf="!txtFirstName.valid && txtFirstName.touched">First Name is mandatory!</span>
       </p>
       <p>
-        <label>Last Name: </label><input type="text" class="form-control" required/>
+        <label>Last Name: </label><input type="text" name="txtLastName" #txtLastName="ngModel" [(ngModel)] = "userToRegister.lastName" class="form-control" required/>
+        <span class="text-danger" *ngIf="!txtLastName.valid && txtLastName.touched">Last Name is mandatory!</span>
       </p>
       <p>
-        <label>Email: </label><input type="text" class="form-control" required/>
+        <label>Email: </label>
+        <input type="email" name="txtEmail" #txtEmail="ngModel" [(ngModel)] = "userToRegister.email"  class="form-control" required/>
+        <span class="text-danger" *ngIf="!txtEmail.valid && txtEmail.touched">Email is mandatory!</span>
       </p>
       <p>
-        <label>Password: </label><input type="password" class="form-control" required/>
+        <label>Password: </label><input type="password" name="txtPassword" #txtPassword="ngModel" [(ngModel)] = "userToRegister.password" class="form-control" required/>
+        <span class="text-danger" *ngIf="!txtPassword.valid && txtPassword.touched">Password is mandatory!</span>
       </p>
       <p>
-        <input type="submit" value="Register" class="btn btn-primary" required/>
+        <input type="submit" value="Sign Up" class="btn btn-primary" required/>
       </p>
     </form>
   </div>
