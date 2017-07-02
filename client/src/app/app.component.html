@@ -38,6 +38,11 @@
   <div class="col-lg-6">
     <form #registerForm = "ngForm" class="col-md-10" (ngSubmit)="onSignUp()">
       <h1>Sign Up</h1>
+      <div *ngIf="alertSignUp">
+        <div class="alert alert-info">
+          <strong>Important! </strong> {{alertSignUp}}
+        </div>
+      </div>
       <p>
         <label>First Name: </label><input type="text" name="txtFirstName" #txtFirstName="ngModel" [(ngModel)] = "userToRegister.firstName" class="form-control" required/>
         <span class="text-danger" *ngIf="!txtFirstName.valid && txtFirstName.touched">First Name is mandatory!</span>

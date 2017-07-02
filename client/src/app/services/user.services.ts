@@ -15,6 +15,7 @@ export class UserService{
     //De este modo puedo usar toda la funcionalidad de Http
 
     constructor(private _http : Http){
+        
         this.url = GLOBAL.user_url;
     }
 
@@ -22,14 +23,27 @@ export class UserService{
     public signIn(userToLogin, getHash = null){
 
         if (getHash != null){
+
             userToLogin.getHash = getHash;
         }
 
-        let json = JSON.stringify(userToLogin);
-        let params = json;
+        let params = JSON.stringify(userToLogin);
 
         let headers = new Headers({"Content-Type": "application/json"});
+
         return this._http.post(this.url + "/login", params, {headers: headers}).map(res => res.json());
+    }
+
+
+    //Metodo para registrarse
+    public signUp(userToRegister){
+
+        let params = JSON.stringify(userToRegister);
+
+        let headers = new Headers({"Content-Type": "application/json"});
+
+        return this._http.post(this.url + "/register", params, {headers: headers}).map(res => res.json());
+
     }
 
     public getIdentity(){
@@ -37,9 +51,11 @@ export class UserService{
         let identity = JSON.parse(localStorage.getItem("identity"));
 
         if(identity!="undefined"){
+
             this.identity = identity;
         }
         else{
+
             this.identity = null;
         }
 
@@ -51,11 +67,14 @@ export class UserService{
         let token = localStorage.getItem("token");
 
         if(token!="undefined"){
+
             this.token = token;
         }
         else{
+
             this.token = null;
         }
+
         return this.token;
     }
 }
