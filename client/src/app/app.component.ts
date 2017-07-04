@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from "./models/user"
 import {UserService} from "./services/user.services";
+import {GLOBAL} from "./services/global";
 
 //Aca abajo cargo el servicio a usar, en un array de providers
 @Component({
@@ -24,6 +25,8 @@ export class AppComponent implements OnInit {
 
   public alertSignUp;
 
+  public url : string;
+
   //Tmb tengo que cargar el servicio en el constructor
   constructor(private _userService : UserService){
 
@@ -31,6 +34,7 @@ export class AppComponent implements OnInit {
 
     this.userToRegister = new User("","","","","","ROLE_USER","");
 
+    this.url = GLOBAL.user_url;
   }
 
   ngOnInit(){
@@ -41,7 +45,7 @@ export class AppComponent implements OnInit {
     
   }
 
-  public onSignIn(){
+  onSignIn(){
     //Datos del usuario identificado
     this._userService.signIn(this.user).subscribe(
 
@@ -104,7 +108,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public signOut(){
+  signOut(){
 
     if (localStorage.getItem("identity")!=null && localStorage.getItem("token")!=null){
 
@@ -121,7 +125,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public onSignUp(){
+  onSignUp(){
     console.log(this.userToRegister);
 
     this._userService.signUp(this.userToRegister).subscribe(
