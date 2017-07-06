@@ -126,8 +126,6 @@ export class AppComponent implements OnInit {
   }
 
   onSignUp(){
-    console.log(this.userToRegister);
-
     this._userService.signUp(this.userToRegister).subscribe(
 
       response => {

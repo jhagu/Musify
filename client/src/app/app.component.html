@@ -25,7 +25,7 @@
   </nav>
 
   <nav id="nav-user-logged">
-    <div class="user-image" *ngIf="(identity.image) && (identity.image!='null')">
+    <div class="user-image">
       <img id="get-image-user" src="{{url + '/get-image/' + identity.image}}"/>
     </div>
     <span id="span-identity-name">{{identity.firstName}}</span>

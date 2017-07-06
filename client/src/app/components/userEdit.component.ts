@@ -27,7 +27,7 @@ export class UserEditComponent implements OnInit{
 
     constructor(private _userService : UserService){
 
-        this.title = "Update my info";
+        this.title = "Update my profile";
 
         //LocalStorage
 
@@ -52,7 +52,7 @@ export class UserEditComponent implements OnInit{
     onSubmit(){
 
         this._userService.update(this.userToUpdate).subscribe(
-            
+        
             response =>{
 
                 if (!response.user){
@@ -75,8 +75,11 @@ export class UserEditComponent implements OnInit{
                         this.makeFileRequest(this.url + "/upload-image/" + this.userToUpdate._id, [], this.filesToUpload).then(
 
                             (result : any) =>{
+
                                 this.userToUpdate.image = result.image;
+
                                 //Vuelvo a actualizar el usuario
+                                
                                 localStorage.setItem("identity", JSON.stringify(this.userToUpdate));
 
                                 let imagePath = this.url + "/get-image/" + this.userToUpdate.image;
@@ -84,9 +87,7 @@ export class UserEditComponent implements OnInit{
                                 document.getElementById("get-image-user").setAttribute("src", imagePath);
                             } 
                         );
-
                     }
-
                     this.alertUpdate = "The user  was successfully updated.";
                 }
             },
