@@ -91,7 +91,7 @@ function updateUser(req, res){
     var update = req.body;
 
     if (userId != req.user.sub){
-        return res.status(500).send({message: "You don't have privilegies to update this user."});
+        return res.status(500).send({message: "You don't have access to update this user."});
     }
 
     User.findByIdAndUpdate(userId, update, (err, userUpdated) => {

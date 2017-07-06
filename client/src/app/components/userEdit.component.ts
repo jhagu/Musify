@@ -32,7 +32,6 @@ export class UserEditComponent implements OnInit{
         //LocalStorage
 
         this.identity = this._userService.getIdentity();
-
         this.token = this._userService.getToken();
 
         //User in the localStorage
@@ -50,7 +49,7 @@ export class UserEditComponent implements OnInit{
     }
 
     onSubmit(){
-
+        
         this._userService.update(this.userToUpdate).subscribe(
         
             response =>{

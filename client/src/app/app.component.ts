@@ -86,6 +86,9 @@ export class AppComponent implements OnInit {
                 //modifico el modelo seteando un nuevo usuario
                 this.user = new User("","","","","","ROLE_USER","");
 
+                console.log(localStorage.getItem("identity"));
+                console.log(localStorage.getItem("token"));
+
               }
             },
             err => {
@@ -112,16 +115,20 @@ export class AppComponent implements OnInit {
 
     if (localStorage.getItem("identity")!=null && localStorage.getItem("token")!=null){
 
+      this.identity=null;
+
+      this.token=null;
+
       localStorage.removeItem("identity");
 
       localStorage.removeItem("token");
 
       localStorage.clear();
       //Lo siguiente es para redireccionar la pagina al div de inicio de sesion
-      this.identity=null;
 
-      this.token=null;
+      this.identity = null;
 
+      this.token = null;
     }
   }
 
