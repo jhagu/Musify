@@ -44,8 +44,6 @@ export class UserEditComponent implements OnInit{
     
     ngOnInit() {
 
-        console.log("userEditComponent successfully loaded.");
-
     }
 
     onSubmit(){
@@ -108,7 +106,7 @@ export class UserEditComponent implements OnInit{
 
     makeFileRequest(url : string, params : Array<String>, files : Array<File>){
 
-        var token = this.token;
+        var token = this._userService.getToken();
 
         return new Promise(function(resolve, reject){
             //Simular el comportamiento de un form normal
