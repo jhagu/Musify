@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from "./models/user"
 import {UserService} from "./services/user.services";
 import {GLOBAL} from "./services/global";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 
 //Aca abajo cargo el servicio a usar, en un array de providers
 @Component({
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
   public url : string;
 
   //Tmb tengo que cargar el servicio en el constructor
-  constructor(private _userService : UserService){
+  constructor(private _userService : UserService, private _route : ActivatedRoute, private _router: Router){
 
     this.user = new User("","","","","","ROLE_USER","");
 
@@ -115,10 +116,6 @@ export class AppComponent implements OnInit {
 
     if (localStorage.getItem("identity")!=null && localStorage.getItem("token")!=null){
 
-      this.identity=null;
-
-      this.token=null;
-
       localStorage.removeItem("identity");
 
       localStorage.removeItem("token");
@@ -129,6 +126,8 @@ export class AppComponent implements OnInit {
       this.identity = null;
 
       this.token = null;
+
+      this._router.navigate(['/']);
     }
   }
 

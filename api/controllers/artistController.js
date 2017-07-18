@@ -50,7 +50,7 @@ function saveArtist(req, res){
 
 function getAll(req, res){
     var page = null;
-    var itemsPerPage = 3;
+    var itemsPerPage = 4;
 
     if (req.params.page){
         page = req.params.page;

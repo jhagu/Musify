@@ -4,6 +4,11 @@ html, body{
     background: #eee;
 }
 
+.contenedor{
+    height: 100%;
+    overflow-y: scroll;
+}
+
 .head-title{
     font-size: 20px;
     font-weight: bold;
@@ -57,5 +62,91 @@ html, body{
 }
 
 #nav-user-logged .user-image img{
-    width: 57px;
+    width: 60px;
+}
+
+#nav-user-logged a:hover{
+    color: white;
+}
+
+#nav-user-logged a{
+    color: #DDD;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    text-decoration: none;
+}
+
+#nav-user-logged .glyphicon-log-out{
+    cursor: pointer;
+}
+
+.actived{
+    border-bottom: 4px solid #84BD00;
+    padding-bottom: 4px;
+}
+
+.imageForEdit img{
+    width: 150px;
+}
+
+.ul-artist-list{
+    margin: 0px;
+    padding: 0px;
+    margin-top: 30px;
+    list-style: none;
+}
+
+.li-artist-item{
+    width: 23%;
+    margin: 0px;
+    padding: 0px;
+    height: 317px;
+    border: 1px solid #444;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.li-artist-item .artist-image{
+    height: 245px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.li-artist-item .artist-image img{
+    width: 100%;
+    height: 78%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.li-artist-item .artist-name{
+    padding: 10px;
+    background: #222326;
+}
+
+
+.li-artist-item .artist-name a{
+    color: white;
+}
+
+#artist-head-card .image{
+    width: 150px;
+    height: 130px;
+    overflow: hidden;
+    float: left;
+    margin-right: 30px;
+}
+
+#artist-head-card .image img{
+    width: 100%;
+    height: 115px;
+}
+
+.secure{
+    margin-top: -30px;
+    background: #222326;
+    position: absolute;
+    
 }

@@ -1,0 +1,43 @@
+<div class="col-lg-4" *ngIf="(identity) && (identity.role == 'ROLE_ADMIN')">
+    <h1>{{title}}</h1>
+
+    <div *ngIf="alertMessage">
+        <div class="alert alert-info">
+            <strong>Important! </strong> {{alertMessage}}
+        </div>
+    </div>
+
+    <form #formArtist="ngForm" (ngSubmit) = "onSubmit()">
+        <p>
+            <label>Name: </label>
+            <input type="text" #txtName="ngModel" name="txtName" [(ngModel)] = "artist.name" required class="form-control"/>
+            <span class="text-danger" *ngIf="!txtName.valid && txtName.touched">Mandatory field!</span>
+        </p>
+
+        <p>
+            <label>Description: </label>
+            <textarea #txtDescription="ngModel" name="txtDescription" [(ngModel)] = "artist.description" class="form-control"></textarea>
+            <!--<span class="text-danger" *ngIf="!txtDescription.valid && txtDescription.touched">Mandatory field!</span>-->
+        </p>
+
+        <div *ngIf="isEdit">
+            <div class="imageForEdit" *ngIf="(artist.image) && (artist.image!='null')">
+                <img src="{{url + '/get-image/' + artist.image}}"/>
+            </div>
+            <p>
+                <label>Upload your image</label>
+                <input type="file" placeholder="Upload image..." (change) = "fileChangeEvent($event)"/>
+            </p>
+        </div>
+
+        <p>
+            <input type="submit" value="{{title}}" [disabled] = "!formArtist.form.valid" class="btn btn-success"/>
+        </p>
+        
+    </form>
+</div>
+
+<div class="col-lg-6 text-danger" *ngIf="(!identity) || (identity.role != 'ROLE_ADMIN')">
+    <h1>Error!</h1>
+    <h3>You don't have access to this section</h3>
+</div>

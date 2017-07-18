@@ -6,19 +6,19 @@
     </a>
   </h1>
   <nav id="navigation">
-    <a href="">
+    <a>
       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
       Search
     </a>
-    <a href="">
+    <a [routerLink] = "['/artists', 1]" [routerLinkActive] = "['actived']">
       <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
       Artists
     </a>
-    <a href="">
+    <a [routerLinkActive] = "['actived']">
       <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
       Albums
     </a>
-    <a href="">
+    <a [routerLinkActive] = "['actived']">
       <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
       Songs
     </a>
@@ -29,7 +29,7 @@
       <img id="get-image-user" src="{{url + '/get-image/' + identity.image}}"/>
     </div>
     <span id="span-identity-name">{{identity.firstName}}</span>
-    <a [routerLink] = "['/editUser']" class="btn btn-basic">
+    <a [routerLink] = "['/editUser']" class="btn btn-basic" [routerLinkActive] = "['actived']">
       <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
       My profile
     </a>
@@ -41,7 +41,7 @@
 </div>
 
 
-<div *ngIf="identity" class="central col-lg-11">
+<div [class.hidden]="!identity" class="central col-lg-11">
   <router-outlet></router-outlet>
 </div>
 
