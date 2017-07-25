@@ -13,6 +13,10 @@ import {ArtistDetailComponent} from "./components/artistDetail.component";
 //Import home component
 import { HomeComponent} from "./components/home.component";
 
+//Import album components
+import { AlbumAddComponent } from "./components/albumAdd.component";
+
+
 //Definir array con todas las configuraciones de ruta
 
 const appRoutes : Routes = [
@@ -23,6 +27,14 @@ const appRoutes : Routes = [
     {path: 'createArtist', component : ArtistAddComponent},
     {path : 'editArtist/:id' , component : ArtistEditComponent}, //ruta de edicion
     {path : 'detailArtist/:id' , component : ArtistDetailComponent}, //ruta de detalle
+    {path:"createAlbum/:artistId", component: AlbumAddComponent},
+
+
+
+
+
+
+    //ULTIMA RUTA!!!!!!!
     {path : '**' , component : HomeComponent}, //rutas invalidas
 ];
 

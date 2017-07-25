@@ -7,11 +7,14 @@ import { routing, appRoutingProviders} from "./app.routing";
 import { AppComponent } from './app.component';
 //Importo mis componentes
 import { UserEditComponent} from "./components/userEdit.component";
-import {ArtistListComponent} from "./components/artistList.component";
 import { HomeComponent} from "./components/home.component";
+
+import {ArtistListComponent} from "./components/artistList.component";
 import {ArtistAddComponent} from "./components/artistAdd.component";
 import {ArtistEditComponent} from "./components/artistEdit.component";
 import {ArtistDetailComponent} from "./components/artistDetail.component";
+
+import {AlbumAddComponent} from "./components/albumAdd.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import {ArtistDetailComponent} from "./components/artistDetail.component";
     HomeComponent,
     ArtistAddComponent,
     ArtistEditComponent,
-    ArtistDetailComponent
+    ArtistDetailComponent,
+    AlbumAddComponent
   ],
   imports: [
     BrowserModule,

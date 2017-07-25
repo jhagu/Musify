@@ -119,7 +119,7 @@ function deleteArtist(req, res){
                             res.status(404).send({message: "No se ha podido eliminar el album"});
                         }
                         else{
-                            Song.find({album : albumRemoved}).remove((err, songRemoved) => {
+                            Song.find({album : albumRemoved._id}).remove((err, songRemoved) => {
                                 if (err){
                                     res.status(500).send({message: "Error al eliminar la canción"});
                                 }

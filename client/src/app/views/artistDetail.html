@@ -6,8 +6,7 @@
         <div class="data">
             <h1>{{artist.name}}</h1>
             <p>{{artist.description}}</p>
-
-            <a href="#" *ngIf="identity.role == 'ROLE_ADMIN'" class="btn btn-success">Add album</a>
+            <a [routerLink] = "['/createAlbum', artist._id]"  *ngIf="identity.role == 'ROLE_ADMIN'" class="btn btn-success">Add album</a>
         </div>
     </div>
 
