@@ -30,7 +30,7 @@ export class AlbumAddComponent implements OnInit{
 
     constructor(private _route : ActivatedRoute, private _router: Router, private _userService : UserService, private _artistService : ArtistService){
 
-        this.title = "Add album to Artist";
+        this.title = "Add album";
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.url = GLOBAL.album_url;
@@ -41,4 +41,11 @@ export class AlbumAddComponent implements OnInit{
         console.log("albumAddComponent.ts successfully loaded");
     }
 
+    onSubmit(){
+        this._route.params.forEach((params: Params) => {
+            let artist_id = params["artistId"];
+            this.album.artist = artist_id;
+            console.log(this.album);
+        });
+    }
 }

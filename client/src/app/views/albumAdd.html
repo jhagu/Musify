@@ -1,3 +1,48 @@
 <div class="col-lg-4" *ngIf="(identity) && (identity.role == 'ROLE_ADMIN')">
     <h1>{{title}}</h1>
+
+    <div *ngIf="alertMessage">
+        <div class="alert alert-info">
+            <strong>Important! </strong> {{alertMessage}}
+        </div>
+    </div>
+
+    <form #formAlbum="ngForm" (ngSubmit) = "onSubmit()">
+        <p>
+            <label>Title: </label>
+            <input type="text" #txtTitle="ngModel" name="txtTitle" [(ngModel)] = "album.title" required class="form-control"/>
+            <span class="text-danger" *ngIf="!txtTitle.valid && txtTitle.touched">Mandatory field!</span>
+        </p>
+
+        <p>
+            <label>Description: </label>
+            <textarea #txtDescription="ngModel" name="txtDescription" [(ngModel)] = "album.description" class="form-control"></textarea>
+            <span class="text-danger" *ngIf="!txtDescription.valid && txtDescription.touched">Mandatory field!</span>
+        </p>
+
+        <p>
+            <label>Year: </label>
+            <textarea #txtYear="ngModel" name="txtYear" [(ngModel)] = "album.year" class="form-control"></textarea>
+            <span class="text-danger" *ngIf="!txtYear.valid && txtYear.touched">Mandatory field!</span>
+        </p>
+
+        <div *ngIf="isEdit">
+            <div class="imageForEdit" *ngIf="(album.image) && (album.image!='null')">
+                <img src="{{url + '/get-image/' + album.image}}"/>
+            </div>
+            <p>
+                <label>Upload your image</label>
+                <input type="file" placeholder="Upload image..." (change) = "fileChangeEvent($event)"/>
+            </p>
+        </div>
+
+        <p>
+            <input type="submit" value="{{title}}" [disabled] = "!formAlbum.form.valid" class="btn btn-success"/>
+        </p>
+    </form>
+</div>
+
+<div class="col-lg-6 text-danger" *ngIf="(!identity) || (identity.role != 'ROLE_ADMIN')">
+    <h1>Error!</h1>
+    <h3>You don't have access to this section</h3>
 </div>
