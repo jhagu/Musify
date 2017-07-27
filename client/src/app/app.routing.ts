@@ -15,6 +15,7 @@ import { HomeComponent} from "./components/home.component";
 
 //Import album components
 import { AlbumAddComponent } from "./components/albumAdd.component";
+import { AlbumEditComponent } from "./components/albumEdit.component";
 
 
 //Definir array con todas las configuraciones de ruta
@@ -23,11 +24,12 @@ const appRoutes : Routes = [
     //Se definen JSONS {path : path, component : component} con configuraciones
     {path : '' , component : HomeComponent}, //ruta vacia
     {path : 'editUser' , component : UserEditComponent}, //ruta de edicion
-    {path: 'artists/:page', component : ArtistListComponent},
-    {path: 'createArtist', component : ArtistAddComponent},
+    {path : "artists/:page", component : ArtistListComponent},
+    {path : 'createArtist', component : ArtistAddComponent},
     {path : 'editArtist/:id' , component : ArtistEditComponent}, //ruta de edicion
     {path : 'detailArtist/:id' , component : ArtistDetailComponent}, //ruta de detalle
-    {path:"createAlbum/:artistId", component: AlbumAddComponent},
+    {path : "createAlbum/:artistId", component: AlbumAddComponent},
+    {path : "editAlbum/:albumId", component:AlbumEditComponent},
 
 
 

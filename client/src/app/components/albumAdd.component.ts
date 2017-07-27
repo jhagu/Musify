@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import { Album } from "../models/album";
 import { Artist } from "../models/artist";
 import {ArtistService} from "../services/artist.services";
+import {AlbumService} from "../services/album.services";
 import {UserService} from "../services/user.services";
 import {GLOBAL} from "../services/global";
 import {Router, ActivatedRoute, Params} from "@angular/router";
@@ -9,7 +10,7 @@ import {Router, ActivatedRoute, Params} from "@angular/router";
 @Component({
     selector : "album-add",
     templateUrl: "../views/albumAdd.html",
-    providers : [UserService, ArtistService]
+    providers : [UserService, ArtistService, AlbumService]
 })
 
 export class AlbumAddComponent implements OnInit{
@@ -28,8 +29,14 @@ export class AlbumAddComponent implements OnInit{
 
     public alertMessage;
 
-    constructor(private _route : ActivatedRoute, private _router: Router, private _userService : UserService, private _artistService : ArtistService){
-
+    constructor(
+        private _route : ActivatedRoute, 
+        private _router: Router, 
+        private _userService : UserService, 
+        private _artistService : ArtistService,
+        private _albumService : AlbumService
+    )
+    {
         this.title = "Add album";
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
@@ -45,7 +52,30 @@ export class AlbumAddComponent implements OnInit{
         this._route.params.forEach((params: Params) => {
             let artist_id = params["artistId"];
             this.album.artist = artist_id;
-            console.log(this.album);
+
+            this._albumService.addAlbum(this.token, this.album).subscribe(
+                res => {
+
+                if (!res.album){
+                    this.alertMessage = "Server error";
+                }
+                else{
+                    this.alertMessage = "Album created successfully";
+                    this.album = res.album;
+                    //this._router.navigate(["/editAlbum", res.album._id]); 
+                    //Para añadir imagen cdo se crea
+                    //Si no le paso el id dentro de las llaves, no redirige correctamente
+                }
+
+                },
+                err =>{
+                    var errorMessage = <any>err;
+                    if (errorMessage!=null){
+                        var body = JSON.parse(err._body);
+                        console.log(err);
+                    }
+                }
+            )
         });
     }
 }
