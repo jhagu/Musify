@@ -32,6 +32,7 @@
 
         <p>
             <input type="submit" value="{{title}}" [disabled] = "!formArtist.form.valid" class="btn btn-success"/>
+            <a [routerLink] = "['/artists', 1]" class="btn btn-danger" *ngIf="isEdit">Cancel</a>
         </p>
         
     </form>

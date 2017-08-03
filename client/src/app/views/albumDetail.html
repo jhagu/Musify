@@ -1,0 +1,17 @@
+<div class = "album-box" *ngIf="album">
+    <div class="album-head-car">
+        <div class="image">
+            <img src="{{url + /get-image/ + album.image}}"/>
+        </div>
+
+        <div class="data">
+            <h1>{{album.title}}</h1>
+            <p>{{album.year}}</p>
+            <p>{{album.description}}</p>
+
+            <a href="#" class="btn btn-success" *ngIf="identity.role == 'ROLE_ADMIN'"></a>
+        </div>
+    </div>
+
+
+</div>

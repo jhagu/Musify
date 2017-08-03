@@ -16,6 +16,7 @@ import { HomeComponent} from "./components/home.component";
 //Import album components
 import { AlbumAddComponent } from "./components/albumAdd.component";
 import { AlbumEditComponent } from "./components/albumEdit.component";
+import {AlbumDetailComponent} from "./components/albumDetail.component";
 
 
 //Definir array con todas las configuraciones de ruta
@@ -30,11 +31,7 @@ const appRoutes : Routes = [
     {path : 'detailArtist/:id' , component : ArtistDetailComponent}, //ruta de detalle
     {path : "createAlbum/:artistId", component: AlbumAddComponent},
     {path : "editAlbum/:albumId", component:AlbumEditComponent},
-
-
-
-
-
+    {path : 'detailAlbum/:albumId' , component : AlbumDetailComponent}, //ruta de detalle
 
     //ULTIMA RUTA!!!!!!!
     {path : '**' , component : HomeComponent}, //rutas invalidas

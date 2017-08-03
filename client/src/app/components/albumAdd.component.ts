@@ -62,9 +62,9 @@ export class AlbumAddComponent implements OnInit{
                 else{
                     this.alertMessage = "Album created successfully";
                     this.album = res.album;
-                    //this._router.navigate(["/editAlbum", res.album._id]); 
                     //Para añadir imagen cdo se crea
                     //Si no le paso el id dentro de las llaves, no redirige correctamente
+                    this._router.navigate(["/editAlbum", res.album._id]); 
                 }
 
                 },

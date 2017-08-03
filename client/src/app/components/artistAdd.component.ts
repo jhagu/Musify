@@ -8,7 +8,7 @@ import {Router, ActivatedRoute, Params} from "@angular/router";
 @Component({
     selector : "artist-add",
     templateUrl: "../views/artistAdd.html",
-    providers : [UserService, ArtistService]
+    providers : [UserService, ArtistService,]
 })
 
 export class ArtistAddComponent implements OnInit{

@@ -50,21 +50,21 @@ export class AlbumEditComponent implements OnInit{
         console.log("albumEdit.component.ts successfully loaded");
 
         //Llamar al metodo de la api para sacar un artista en base a su id getArtist
-        //this.getAlbum();
+        this.getAlbum();
     }
 
-   /*  public getAlbum(){
+   public getAlbum(){
         
         this._route.params.forEach((params : Params) => {
             let id = params["albumId"];
 
-            this._albumService.getArtist(this.token, id).subscribe(
+            this._albumService.getAlbum(this.token, id).subscribe(
                 res =>{
-                    if (!res.artist){
+                    if (!res.album){
                         this._router.navigate(["/"]);
                     }
                     else{
-                        this.artist = res.artist;
+                        this.album = res.album;
                     }
                 },
                 err =>{
@@ -80,34 +80,37 @@ export class AlbumEditComponent implements OnInit{
 
     }
 
-    onSubmit(){
-        console.log(this.artist);
-        
+   onSubmit(){
+              
         this._route.params.forEach((params : Params) => {
             
-            let id = params["id"];
+            let id = params["albumId"];
             
-            this._artistService.updateArtist(this.token, id, this.artist).subscribe(
+            this._albumService.updateAlbum(this.token, id, this.album).subscribe(
                 res => {
 
-                    if (!res.artist){
+                    if (!res.album){
                         this.alertMessage = "Server error";
                     }
                     else{
-                        this.alertMessage = "Artist updated successfully";
-                        //Subir imagen artista
-                        this._uploadService.makeFileRequest(this.url + "/upload-image/" + id, [], this.filesToUpload, this.token, "image")
-                        .then(
+                        this.alertMessage = "Album updated successfully";
+
+                        if (!this.filesToUpload){
+                            //Redirigir
+                            this._router.navigate(["/detailArtist", res.album.artist]);
+                        }
+                        else{                        
+                            //Subir imagen artista
+                            this._uploadService.makeFileRequest(this.url + "/upload-image/" + id, [], this.filesToUpload, this.token, "image")
+                            .then(
                                 (result) =>{
-                                    this._router.navigate(["/"]);
+                                    this._router.navigate(["/detailArtist", res.album.artist]);
                                 },
                                 (error) =>{
                                     console.log(error);
                                 }
-                        );
-
-                        //this.artist = res.artist;
-                        //this._router.navigate(["/editArtist"], res.artist._id); //Para añadir imagen cdo se crea
+                            );
+                        }
                     }
                 },
                 err =>{
@@ -121,8 +124,8 @@ export class AlbumEditComponent implements OnInit{
         });
     }
 
-    fileChangeEvent(fileInput : any){
+   fileChangeEvent(fileInput : any){
 
         this.filesToUpload = <Array<File>> fileInput.target.files; 
-    } */
+    } 
 }

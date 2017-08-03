@@ -1,7 +1,7 @@
 <div *ngIf="artist" class="div-artist-box">
     <div id="artist-head-card">
         <div class="image">
-            <img src="{{url + '/get-image/' + artist.image}}" *ngIf="(artist.image && artist.image!=null)"/>
+            <img src="{{artistUrl + '/get-image/' + artist.image}}" *ngIf="(artist.image && artist.image!=null)"/>
         </div>
         <div class="data">
             <h1>{{artist.name}}</h1>
@@ -13,5 +13,31 @@
     <div class="clearfix"></div>
     <div id="albums-gallery" *ngIf="albums">
         <!--LISTAR ALBUMS-->
+        <ul class="ul-album-list">
+            <li *ngFor="let album of albums" class="li-album-item col-lg-4">
+                <div class="album-image">
+                    <img src="{{albumUrl  + '/get-image/' +  album.image}}" *ngIf="(album.image && album.image!=null)"/>
+                </div>
+                <div class="album-name">
+                    <p>
+                        <a [routerLink] = "['/detailAlbum', album._id]">{{album.title}}</a> ({{album.year}})
+                    </p>
+                    <p>
+                        <a [routerLink] = "['/detailArtist', album.artist._id]">
+                            {{album.artist.name}}
+                        </a>
+                    </p>
+                    <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+                        <a class="btn btn-sm btn-warning" [routerLink] = "['/editAlbum', album._id]">Edit</a>
+                        <a class="btn btn-sm btn-danger" (click) = "onDeleteAlbum(album._id)">Delete</a>
+                    </div>
+
+                    <div class="secure" *ngIf="confirmated == album._id">
+                        <a class="btn btn-sm btn-danger" (click) = "onConfirmDelete(album._id)">Delete</a>
+                        <a class="btn btn-sm btn-success" (click) = "onCancelDelete()">Cancel</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

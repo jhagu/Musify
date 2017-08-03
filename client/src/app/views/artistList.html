@@ -17,6 +17,7 @@
             </div>
             <div class="artist-name">
                 <a [routerLink] = "['/detailArtist', artist._id]">{{artist.name}}</a>
+
                 <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
                     <a class="btn btn-sm btn-warning" [routerLink] = "['/editArtist', artist._id]">Edit</a>
                     <a class="btn btn-sm btn-danger" (click) = "onDeleteArtist(artist._id)">Delete</a>

@@ -1,27 +1,23 @@
 import {Component, OnInit} from "@angular/core";
-import { Artist } from "../models/artist";
 import { Album } from "../models/album";
-import {ArtistService} from "../services/artist.services";
 import {UserService} from "../services/user.services";
 import {AlbumService} from "../services/album.services";
 import {GLOBAL} from "../services/global";
 import {Router, ActivatedRoute, Params} from "@angular/router";
 
 @Component({
-    selector : "artist-detail",
-    templateUrl: "../views/artistDetail.html", //MISMA PLANTILLA
-    providers : [UserService, ArtistService, AlbumService]
+    selector : "album-detail",
+    templateUrl: "../views/albumDetail.html", //MISMA PLANTILLA
+    providers : [UserService, AlbumService]
 })
 
-export class ArtistDetailComponent implements OnInit{
+export class AlbumDetailComponent implements OnInit{
 
-    public artist : Artist;
+    public album : Album;
 
     public identity;
 
     public token;
-
-    public artistUrl:string;
     
     public albumUrl:string;
 
@@ -35,36 +31,34 @@ export class ArtistDetailComponent implements OnInit{
         private _route : ActivatedRoute, 
         private _router: Router, 
         private _userService : UserService, 
-        private _artistService : ArtistService,
         private _albumService : AlbumService){
 
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
-        this.artistUrl = GLOBAL.artist_url;
         this.albumUrl = GLOBAL.album_url;
     }
 
     ngOnInit(){
-        console.log("artistDetail.component.ts successfully loaded");
-        this.getArtist();
+        console.log("albumDetail.component.ts successfully loaded");
+        
+        //Sacar album de la bb dd
+        this.getAlbum();
     }
 
-    public getArtist(){
-        
+    public getAlbum(){
         this._route.params.forEach((params : Params) => {
-            let id = params["id"];
+            let id = params["albumId"];
 
-            this._artistService.getArtist(this.token, id).subscribe(
+            this._albumService.getAlbum(this.token, id).subscribe(
                 res =>{
-                    if (!res.artist){
+                    if (!res.album){
                         this._router.navigate(["/"]);
                     }
                     else{
-                        this.artist = res.artist;
+                        this.album = res.album;
+                        //Mostrar canciones del album
 
-                        //Mostrar albums del artista
-
-                        this._albumService.getAlbums(this.token, res.artist._id).subscribe(
+                        /* this._albumService.getAlbums(this.token, res.artist._id).subscribe(
                             res =>{
                                 if(!res.albums){
                                     this.alertMessage = "Albums not found for" + this.artist.name;
@@ -81,7 +75,7 @@ export class ArtistDetailComponent implements OnInit{
                                     console.log(err);
                                 }
                             }
-                        )
+                        ) */
                     }
                 },
                 err =>{
@@ -97,7 +91,7 @@ export class ArtistDetailComponent implements OnInit{
 
     }
 
-    onDeleteAlbum(id){
+    /* onDeleteAlbum(id){
 
         this.confirmated = id;
     }
@@ -124,5 +118,5 @@ export class ArtistDetailComponent implements OnInit{
                 }
             }
         );
-    }
+    } */ 
 }

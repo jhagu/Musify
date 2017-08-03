@@ -38,6 +38,7 @@
 
         <p>
             <input type="submit" value="{{title}}" [disabled] = "!formAlbum.form.valid" class="btn btn-success"/>
+            <a [routerLink] = "['/detailArtist', album.artist._id]" class="btn btn-danger">Cancel</a>
         </p>
     </form>
 </div>
