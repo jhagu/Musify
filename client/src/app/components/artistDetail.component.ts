@@ -71,7 +71,6 @@ export class ArtistDetailComponent implements OnInit{
                                 }
                                 else{
                                     this.albums = res.albums;
-                                    console.log(this.albums);
                                 }
                             },
                             err =>{

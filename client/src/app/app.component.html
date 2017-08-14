@@ -41,11 +41,11 @@
 </div>
 
 
-<div [class.hidden]="!identity" class="central col-lg-11">
+<div [class.hidden]="!identity" class="contenedor col-lg-11">
   <router-outlet></router-outlet>
+  <div class="clearfix"></div>
+  <player class="player" *ngIf="identity"></player>
 </div>
-
-
 <div class="col-lg-12" *ngIf="!identity">
   <div class="col-lg-6">
     <form #loginForm ="ngForm" (ngSubmit) = "onSignIn()" class="col-md-10">

@@ -1,14 +1,16 @@
 import {Component, OnInit} from "@angular/core";
 import { Album } from "../models/album";
+import {Song} from "../models/song";
 import {UserService} from "../services/user.services";
 import {AlbumService} from "../services/album.services";
+import {SongService} from "../services/song.services";
 import {GLOBAL} from "../services/global";
 import {Router, ActivatedRoute, Params} from "@angular/router";
 
 @Component({
     selector : "album-detail",
-    templateUrl: "../views/albumDetail.html", //MISMA PLANTILLA
-    providers : [UserService, AlbumService]
+    templateUrl: "../views/albumDetail.html", 
+    providers : [UserService, AlbumService, SongService]
 })
 
 export class AlbumDetailComponent implements OnInit{
@@ -23,19 +25,23 @@ export class AlbumDetailComponent implements OnInit{
 
     public alertMessage;
 
-    public albums : Album[];
+    public songs : Song[];
 
     public confirmated;
+
+    public songUrl : string;
 
     constructor(
         private _route : ActivatedRoute, 
         private _router: Router, 
         private _userService : UserService, 
-        private _albumService : AlbumService){
+        private _albumService : AlbumService,
+        private _songService : SongService){
 
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.albumUrl = GLOBAL.album_url;
+        this.songUrl = GLOBAL.song_url;
     }
 
     ngOnInit(){
@@ -58,14 +64,13 @@ export class AlbumDetailComponent implements OnInit{
                         this.album = res.album;
                         //Mostrar canciones del album
 
-                        /* this._albumService.getAlbums(this.token, res.artist._id).subscribe(
+                        this._songService.getSongs(this.token, res.album._id).subscribe(
                             res =>{
-                                if(!res.albums){
-                                    this.alertMessage = "Albums not found for" + this.artist.name;
+                                if(!res.songs){
+                                    this.alertMessage = "Songs not found for" + this.album.title;
                                 }
                                 else{
-                                    this.albums = res.albums;
-                                    console.log(this.albums);
+                                    this.songs = res.songs;
                                 }
                             },
                             err =>{
@@ -75,7 +80,7 @@ export class AlbumDetailComponent implements OnInit{
                                     console.log(err);
                                 }
                             }
-                        ) */
+                        ) 
                     }
                 },
                 err =>{
@@ -88,10 +93,9 @@ export class AlbumDetailComponent implements OnInit{
             );
 
         });
-
     }
 
-    /* onDeleteAlbum(id){
+    onDeleteSong(id){
 
         this.confirmated = id;
     }
@@ -100,14 +104,14 @@ export class AlbumDetailComponent implements OnInit{
         this.confirmated = null;
     }
 
-    onConfirmDelete(id){
-        this._albumService.deleteAlbum(this.token, id).subscribe(
+   onConfirmDelete(id){
+        this._songService.deleteSong(this.token, id).subscribe(
             res =>{
-                if (!res.album){
+                if (!res.song){
                     alert("Server error");
                 }
                 else{
-                    this.getArtist();
+                    this.getAlbum();
                 }
             },
             err =>{
@@ -118,5 +122,21 @@ export class AlbumDetailComponent implements OnInit{
                 }
             }
         );
-    } */ 
+    } 
+    
+    
+    startPlayer(song){
+        let songPlayer = JSON.stringify(song);
+        let filePath = this.songUrl + "/get-song/" + song.file;
+        let imagePath = this.albumUrl + "/get-image/" + song.album.image;
+
+        localStorage.setItem("songSound", songPlayer);
+        document.getElementById("mp3-source").setAttribute("src", filePath);
+        (document.getElementById("player") as any).load();
+        (document.getElementById("player") as any).play();
+
+        document.getElementById("play-song-title").innerHTML = song.title;
+        document.getElementById("play-song-artist").innerHTML = song.album.artist.name;
+        document.getElementById("play-image-album").setAttribute("src", imagePath);
+    }
 }

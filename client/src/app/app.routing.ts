@@ -18,20 +18,31 @@ import { AlbumAddComponent } from "./components/albumAdd.component";
 import { AlbumEditComponent } from "./components/albumEdit.component";
 import {AlbumDetailComponent} from "./components/albumDetail.component";
 
+//Import song components
+import {SongAddComponent} from "./components/songAdd.component";
+import {SongEditComponent} from "./components/songEdit.component";
+
 
 //Definir array con todas las configuraciones de ruta
 
 const appRoutes : Routes = [
     //Se definen JSONS {path : path, component : component} con configuraciones
     {path : '' , component : HomeComponent}, //ruta vacia
+    
     {path : 'editUser' , component : UserEditComponent}, //ruta de edicion
     {path : "artists/:page", component : ArtistListComponent},
+
     {path : 'createArtist', component : ArtistAddComponent},
     {path : 'editArtist/:id' , component : ArtistEditComponent}, //ruta de edicion
     {path : 'detailArtist/:id' , component : ArtistDetailComponent}, //ruta de detalle
+
     {path : "createAlbum/:artistId", component: AlbumAddComponent},
     {path : "editAlbum/:albumId", component:AlbumEditComponent},
     {path : 'detailAlbum/:albumId' , component : AlbumDetailComponent}, //ruta de detalle
+
+    {path : 'createSong/:albumId', component : SongAddComponent},
+    {path : "editSong/:songId", component:SongEditComponent},
+
 
     //ULTIMA RUTA!!!!!!!
     {path : '**' , component : HomeComponent}, //rutas invalidas

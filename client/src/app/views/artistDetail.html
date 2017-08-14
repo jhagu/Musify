@@ -23,9 +23,7 @@
                         <a [routerLink] = "['/detailAlbum', album._id]">{{album.title}}</a> ({{album.year}})
                     </p>
                     <p>
-                        <a [routerLink] = "['/detailArtist', album.artist._id]">
-                            {{album.artist.name}}
-                        </a>
+                        {{album.artist.name}}
                     </p>
                     <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
                         <a class="btn btn-sm btn-warning" [routerLink] = "['/editAlbum', album._id]">Edit</a>
@@ -39,5 +37,6 @@
                 </div>
             </li>
         </ul>
+        <div class="clearfix"></div>
     </div>
 </div>
